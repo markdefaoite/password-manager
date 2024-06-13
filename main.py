@@ -4,6 +4,13 @@ from tkinter import *
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
+def save():
+    with open("data.txt", "a") as data_file:
+        output = website_entry.get() + " | " + email_entry.get() + " | " + password_entry.get() + "\n"
+        website_entry.delete(0, END)
+        password_entry.delete(0, END)
+        data_file.write(output)
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = Tk()
@@ -31,6 +38,7 @@ website_entry.grid(column=1, row=1, columnspan=2)
 
 email_entry = Entry()
 email_entry.config(width=40)
+email_entry.insert(0, "Jane.Doe@email.com")
 email_entry.grid(column=1, row=2, columnspan=2)
 
 password_entry = Entry()
@@ -40,7 +48,7 @@ password_entry.grid(column=1, row=3)
 password_button = Button(text="Generate Password", justify="left")
 password_button.grid(column=2, row=3)
 
-add_button = Button(text="Add")
+add_button = Button(text="Add", command=save)
 add_button.config(width=36)
 add_button.grid(column=1, row=4, columnspan=2)
 
